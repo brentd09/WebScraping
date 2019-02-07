@@ -1,13 +1,13 @@
 ﻿<#
 .Synopsis
-   Short description
+   QLD River levels
 .DESCRIPTION
-   This was a test to see how to extract data from a website table, SEQ River Water levels 
+   This was a test to see how to extract data from a website table, All QLD River Water levels 
 .NOTES
    General notes
    Created
    By: Brent Denny
-   On: Aug 2017
+   On: Feb 2019
 #>
 $webResponse = Invoke-WebRequest  "http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?IDQ60005.html" -UseBasicParsing
 $tableData = $webResponse.RawContent -split "`n" | Select-String -Pattern '(?=^\s*\<t[rdh]\>.*)(?!.*\<a\s*href).*'
