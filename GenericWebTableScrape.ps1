@@ -1,8 +1,12 @@
 function Find-TablesInHtml {
   Param (
-    [string]$url = 'https://talosintelligence.com/reputation_center/lookup?search=8.8.8.8'
+    [string]$url = 'https://talosintelligence.com/reputation_center/lookup?search=8.8.8.8',
+    [string]$HTMLTagName = 'table'
 
   )
+  $TagNameCloseLength = $HtmlTagClose.Length + 3
+  $HtmlTagOpen = '<'+$HTMLTagName
+  $HtmlTagClose = '</'+$HTMLTagName
   [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
   $htmlObj = Invoke-WebRequest -UseBasicParsing -Uri $url
   
@@ -12,14 +16,14 @@ function Find-TablesInHtml {
   do {
     if ($FirstPass -eq $true) {
       $FirstPass = $false
-      $NextTableStart = $SingleStringNoGaps.IndexOf("<table")
-      $NextTableEnd   = $SingleStringNoGaps.indexof("</table") + 8
+      $NextTableStart = $SingleStringNoGaps.IndexOf($HtmlTagOpen)
+      $NextTableEnd   = $SingleStringNoGaps.indexof($HtmlTagClose) + $TagNameCloseLength
       $TableLength = $NextTableEnd - $NextTableStart
     }
     else {
       $IndexEnd   = $NextTableEnd
-      $NextTableStart = $SingleStringNoGaps.IndexOf("<table",$IndexEnd)
-      $NextTableEnd   = $SingleStringNoGaps.IndexOf("</table",($IndexEnd)) + 8
+      $NextTableStart = $SingleStringNoGaps.IndexOf($HtmlTagOpen,$IndexEnd)
+      $NextTableEnd   = $SingleStringNoGaps.IndexOf($HtmlTagClose,($IndexEnd)) + $TagNameCloseLength
       $TableLength = $NextTableEnd - $NextTableStart
     }
     if ($NextTablestart -gt 0) {
