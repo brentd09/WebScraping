@@ -19,7 +19,7 @@ function Get-TagsInHtml {
   #>
   [cmdletbinding()]
   Param (
-    [string]$url = 'https://talosintelligence.com/reputation_center/lookup?search=8.8.8.8',
+    [string]$url = 'https://www.seqwater.com.au/water-supply/dam-levels',
     [string]$HTMLTagName = 'table'
 
   )
