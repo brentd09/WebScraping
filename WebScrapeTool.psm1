@@ -1,4 +1,4 @@
-function Find-TagsInHtml {
+function Get-TagsInHtml {
   <#
   .SYNOPSIS
     This command will scrape out HTML content from a Web page
@@ -10,7 +10,7 @@ function Find-TagsInHtml {
     and setup an object collection showing the entire <table>...</table> so this can 
     be converted to XML to make the traversal of the tags and data very simple.
   .EXAMPLE
-    [xml[]]$WebInfo = Find-TagsInHtml -URL 'http://website.com' -HTMLTagName 'table'
+    [xml[]]$WebInfo = Get-TagsInHtml -URL 'http://website.com' -HTMLTagName 'table'
     This will extract all of the TABLES from the URL and will create a XML array.
   .NOTES
     General notes
