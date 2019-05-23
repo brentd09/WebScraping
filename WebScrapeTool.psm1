@@ -36,24 +36,24 @@ function Get-TagsInHtml {
   do {
     if ($FirstPass -eq $true) {
       $FirstPass = $false
-      $NextTableStart = $SingleStringNoGaps.IndexOf($HtmlTagOpen)
-      $NextTableEnd   = $SingleStringNoGaps.indexof($HtmlTagClose) + $TagNameCloseLength
-      $TableLength = $NextTableEnd - $NextTableStart
+      $NextTagStart = $SingleStringNoGaps.IndexOf($HtmlTagOpen)
+      $NextTagEnd   = $SingleStringNoGaps.indexof($HtmlTagClose) + $TagNameCloseLength
+      $TagLength = $NextTagEnd - $NextTagStart
     }
     else {
-      $IndexEnd   = $NextTableEnd
-      $NextTableStart = $SingleStringNoGaps.IndexOf($HtmlTagOpen,$IndexEnd)
-      $NextTableEnd   = $SingleStringNoGaps.IndexOf($HtmlTagClose,($IndexEnd)) + $TagNameCloseLength
-      $TableLength = $NextTableEnd - $NextTableStart
+      $IndexEnd   = $NextTagEnd
+      $NextTagStart = $SingleStringNoGaps.IndexOf($HtmlTagOpen,$IndexEnd)
+      $NextTagEnd   = $SingleStringNoGaps.IndexOf($HtmlTagClose,($IndexEnd)) + $TagNameCloseLength
+      $TagLength = $NextTagEnd - $NextTagStart
     }
-    if ($NextTablestart -gt 0 -and $NextTableEnd -gt 0 -and $TableLength -gt 0) {
+    if ($NextTagstart -gt 0 -and $NextTagEnd -gt 0 -and $TagLength -gt 0) {
       $Hash = [ordered]@{
-        TableStart = $NextTableStart
-        TableEnd   = $NextTableEnd
-        TableLength = $TableLength
-        TableRaw = $SingleStringNoGaps.Substring($NextTableStart,$TableLength)
+        TagStart = $NextTagStart
+        TagEnd   = $NextTagEnd
+        TagLength = $TagLength
+        TagRaw = $SingleStringNoGaps.Substring($NextTagStart,$TagLength)
       }
       New-Object -TypeName psobject -Property $Hash
     }
-  } until ($NextTablestart -eq -1)
+  } until ($NextTagstart -eq -1)
 }
