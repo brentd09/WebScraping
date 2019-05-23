@@ -26,7 +26,7 @@ function Get-TagsInHtml {
 
   $HtmlTagOpen = '<'+$HTMLTagName
   $HtmlTagClose = '</'+$HTMLTagName
-  $TagNameCloseLength = $HtmlTagClose.Length + 3
+  $TagNameCloseLength = $HtmlTagClose.Length + 1
   [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
   $htmlObj = Invoke-WebRequest -UseBasicParsing -Uri $url
   
