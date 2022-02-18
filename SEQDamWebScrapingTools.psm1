@@ -1,4 +1,4 @@
-function Get-SeqDamLevels {
+function Get-SeqDamLevel {
   [CmdletBinding()]
   Param ($SEQDamUrl = 'https://www.seqwater.com.au/dam-levels')
   $RawWebContent = (Invoke-WebRequest -Uri $SEQDamUrl).Content
