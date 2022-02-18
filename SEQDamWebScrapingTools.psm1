@@ -25,8 +25,8 @@ function Get-SeqDamLevel {
     Select-Object -Skip 1 | 
     ConvertFrom-Csv -Header "Dam","Full","Current","Percent","Date","Comment" |
     Select-Object -Property Dam,
-                            @{n='FullCapacity';e={$_.Full -as [int]}},
-                            @{n='CurrentCapacity';e={$_.Current -as [int]}},
+                            @{n='FullCapacity(ML)';e={$_.Full -as [int]}},
+                            @{n='CurrentCapacity(ML)';e={$_.Current -as [int]}},
                             @{n='PercentFull';e={$_.Percent -as [double]}},
                             @{n='DateMeasured';e={$_.Date -as [datetime]}},
                             Comment 
