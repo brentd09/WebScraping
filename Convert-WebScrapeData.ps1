@@ -22,4 +22,4 @@ $CovertTemplate = @'
 $Tags = Get-TagsInHtml
 [xml]$xml = $tags[1].TagRaw
 $damdata = $xml.table.tbody.tr.td | Select-Object id,'#text'
-$damdata | select '#text' | ConvertFrom-String -TemplateContent $CovertTemplate
+$damdata | Select-Object '#text' | ConvertFrom-String -TemplateContent $CovertTemplate
